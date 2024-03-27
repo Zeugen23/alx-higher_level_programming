@@ -1,11 +1,28 @@
 #!/usr/bin/node
-if (process.argv[2] === undefined || isNaN(process.argv[2])) {
-  console.log('Missing size');
-} else {
-  const x = Number(process.argv[2]);
-  let i = 0;
-  while (i < x) {
-    console.log('X'.repeat(x));
-    i++;
+const process = require('process');
+let build = '';
+let failed = 'Missing size';
+let num;
+let i;
+let j;
+
+if (process.argv.length > 2) {
+  num = parseInt(process.argv[2]);
+  if (isNaN(num)) {
+    build = failed;
+  } else {
+    for (i = 0; i < num; i++) {
+      if (i > 0) {
+        build += '\n';
+      }
+      for (j = 0; j < num; j++) {
+        build += 'X';
+      }
+    }
   }
+} else {
+  build = failed;
+}
+if (build !== '') {
+  console.log(build);
 }

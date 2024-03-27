@@ -1,11 +1,25 @@
 #!/usr/bin/node
-if (process.argv[2] === undefined || isNaN(process.argv[2])) {
-  console.log('Missing number of occurrences');
-} else {
-  const x = Number(process.argv[2]);
-  let i = 0;
-  while (i < x) {
-    console.log('C is fun');
-    i++;
+const process = require('process');
+let build = '';
+let failed = 'Missing number of occurrences';
+let num;
+let i;
+
+if (process.argv.length > 2) {
+  num = parseInt(process.argv[2]);
+  if (isNaN(num)) {
+    build = failed;
+  } else {
+    for (i = 0; i < num; i++) {
+      if (i > 0) {
+        build += '\n';
+      }
+      build += 'C is fun';
+    }
   }
+} else {
+  build = failed;
+}
+if (build !== '') {
+  console.log(build);
 }
